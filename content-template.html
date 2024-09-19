@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Viewer</title>
+    <style>
+        body {
+            font-family: 'Courier New', cursive, sans-serif;
+            background-color: #f4f1fb;
+            margin: 0;
+            padding: 0;
+            color: #4d4d66;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        video {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            color: #9b59b6;
+        }
+
+        p {
+            line-height: 1.8;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="content-title">Loading...</h1>
+        <div id="content-body"></div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoSrc = urlParams.get('video');
+        const contentTitle = urlParams.get('title');
+        const filePath = urlParams.get('filePath');
+
+        const contentTitleElement = document.getElementById('content-title');
+        const contentBodyElement = document.getElementById('content-body');
+
+        if (videoSrc) {
+            // 如果是视频，显示视频播放器
+            contentTitleElement.innerText = "Video Player";
+            contentBodyElement.innerHTML = `
+                <video controls>
+                    <source src="${videoSrc}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `;
+        } else if (filePath) {
+            // 如果是文章或剧本，加载对应的内容文件
+            fetch(filePath)
+                .then(response => response.text())
+                .then(text => {
+                    contentTitleElement.innerText = contentTitle;
+                    contentBodyElement.innerHTML = `<p>${text}</p>`;
+                })
+                .catch(error => {
+                    contentTitleElement.innerText = "Error";
+                    contentBodyElement.innerText = "Sorry, could not load content.";
+                });
+        }
+    </script>
+</body>
+
+</html>

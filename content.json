@@ -1,0 +1,44 @@
+[
+    {
+        "type": "video",
+        "title": "Video 1",
+        "thumbnail": "images/video1-thumbnail.jpg",
+        "videoSrc": "videos/video1.mp4"
+    },
+    {
+        "type": "video",
+        "title": "Video 2",
+        "thumbnail": "images/video2-thumbnail.jpg",
+        "videoSrc": "videos/video2.mp4"
+    },
+    {
+        "type": "script",
+        "title": "Script 1",
+        "description": "This is a brief intro to the story.",
+        "filePath": "scripts/script1.txt"
+    },
+    {
+        "type": "script",
+        "title": "Script 2",
+        "description": "This is a brief intro to the story.",
+        "filePath": "scripts/script2.txt"
+    },
+    {
+        "type": "script",
+        "title": "Script 3",
+        "description": "This is a brief intro to the story.",
+        "filePath": "scripts/script3.txt"
+    },
+    {
+        "type": "script",
+        "title": "Script 4",
+        "description": "This is a brief intro to the story.",
+        "filePath": "scripts/script4.txt"
+    },
+    {
+        "type": "article",
+        "title": "Article 1",
+        "description": "Insights gained from working on a project.",
+        "filePath": "articles/article1.txt"
+    }
+]
