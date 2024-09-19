@@ -1,44 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LanaQ!</title>
+    <title>LanaQ's Creations</title>
+    <style>
+        body {
+            font-family: 'Courier New', cursive, sans-serif;
+            background-color: #f4f1fb;
+            margin: 0;
+            padding: 0;
+            color: #4d4d66;
+        }
+
+        header {
+            background: linear-gradient(135deg, #d6a4e0, #a86bd4);
+            text-align: center;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header img {
+            width: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 4px solid #fff;
+        }
+
+        header h1 {
+            font-size: 32px;
+            color: white;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #9b59b6;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .video-grid,
+        .content-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .video-item,
+        .content-item {
+            position: relative;
+            margin: 15px;
+            max-width: 300px;
+            flex-basis: calc(50% - 30px);
+            background-color: #f9f7fc;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .video-item img {
+            width: 100%;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .video-item .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            padding: 10px 20px;
+        }
+
+        .content-item:hover,
+        .video-item:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #6c5ce7;
+        }
+
+        .content-item p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        footer {
+            background-color: #f3e6fa;
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: #9b59b6;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+
+            .video-grid,
+            .content-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .video-item,
+            .content-item {
+                max-width: 100%;
+                flex-basis: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <div style="
-    background-color: rgb(236, 235, 241);
-    text-align: center;
-    padding: 20px;
-    "> 
-        <img src="https://raw.githubusercontent.com/GU0dx/lana/main/profile.png" alt="LanaQ" width="120px">
+    <header>
+        <img src="https://raw.githubusercontent.com/GU0dx/lana/main/profile.png" alt="LanaQ">
+        <h1>Welcome to LanaQ's Creations</h1>
+    </header>
+
+    <div class="container">
+        <!-- 视频部分 -->
+        <div class="section">
+            <h2>Short Videos by UE5</h2>
+            <div class="video-grid" id="video-grid"></div>
+        </div>
+
+        <!-- 脚本部分 -->
+        <div class="section">
+            <h2>Scripts</h2>
+            <div class="content-grid" id="script-grid"></div>
+        </div>
+
+        <!-- 文章部分 -->
+        <div class="section">
+            <h2>Articles</h2>
+            <div class="content-grid" id="article-grid"></div>
+        </div>
     </div>
-    <div style="
-    text-align: center;
-    max-width: 700px;
-    margin: 30px auto;
-    padding: 25px;
-    line-height: 1.7;
-    ">
-    <p>Hi, welcome to LanaQ's website!</p>
-    <p>My Creations👇:
-    
-    </p> 
-    <p>1.short videos by UE5</p>
-    <p>2.scripts</p>
-    <p>3.articles</p>
-    <p>……</p>
-    <p>……</p>
-    <p>……</p>
-    <p>……</p>
-    </div>
-    <div style="
-    background-color: rgb(236, 235, 241);
-    text-align: center;
-    padding: 40px;
-    font-size: 20px;
-    ">
-    <a href="https://github.com/LanaQQ">My Github</a>
-    </div>
+
+    <footer>
+        <p>Find more of my work on <a href="https://github.com/LanaQQ" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script>
+        // 通过 Fetch API 加载 JSON 文件
+        fetch('content.json')
+            .then(response => response.json())
+            .then(data => {
+                const videoGrid = document.getElementById('video-grid');
+                const scriptGrid = document.getElementById('script-grid');
+                const articleGrid = document.getElementById('article-grid');
+
+                data.forEach(content => {
+                    if (content.type === 'video') {
+                        const videoItem = document.createElement('div');
+                        videoItem.classList.add('video-item');
+                        videoItem.innerHTML = `
+                            <a href="content-template.html?video=${encodeURIComponent(content.videoSrc)}">
+                                <img src="${content.thumbnail}" alt="${content.title}">
+                                <div class="play-button">▶</div>
+                            </a>
+                            <h3>${content.title}</h3>
+                        `;
+                        videoGrid.appendChild(videoItem);
+                    } else if (content.type === 'script') {
+                        const scriptItem = document.createElement('div');
+                        scriptItem.classList.add('content-item');
+                        scriptItem.innerHTML = `
+                            <h3><a href="content-template.html?filePath=${encodeURIComponent(content.filePath)}&title=${encodeURIComponent(content.title)}">${content.title}</a></h3>
+                            <p>${content.description}</p>
+                        `;
+                        scriptGrid.appendChild(scriptItem);
+                    } else if (content.type === 'article') {
+                        const articleItem = document.createElement('div');
+                        articleItem.classList.add('content-item');
+                        articleItem.innerHTML = `
+                            <h3><a href="content-template.html?filePath=${encodeURIComponent(content.filePath)}&title=${encodeURIComponent(content.title)}">${content.title}</a></h3>
+                            <p>${content.description}</p>
+                        `;
+                        articleGrid.appendChild(articleItem);
+                    }
+                });
+            })
+            .catch(error => console.error('Error loading content:', error));
+    </script>
 </body>
+
 </html>
